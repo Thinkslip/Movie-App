@@ -2,15 +2,11 @@
 
 This a movie review application which allows users to create accounts, review movies, and manage watchlists
 
----
-
 ## Features
 - User authentication (JWT-based)
 - CRUD operations for movies, reviews, and watchlists
 - Role-based authorization (admin features)
 - MySQL database integreation with Sequelize ORM
-
----
 
 ## Installation
 
