@@ -1,6 +1,6 @@
 # Movie App
 
-This a movie review application which allows users to create accounts, review movies, and manage watchlists
+This a movie review application which allows users to create accounts, review movies, and manage watchlists.
 
 ## Features
 - User authentication (JWT-based)

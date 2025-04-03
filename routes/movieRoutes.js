@@ -1,4 +1,5 @@
 const express = require("express");
+const { verifyToken, isAdmin } = require("../middleware/authMiddleware");
 const axios = require("axios");
 const Movie = require("../models/Movie");
 require("dotenv").config();
@@ -37,7 +38,21 @@ router.get("/search", async (req, res) => {
         
         res.json(movie);
     } catch (error) {
-        res.status(500).json({ error: "Server error", details: error.message });
+       next(error);
+    }
+});
+
+// Add a movie (ADMIN ONLY)
+router.post("/", verifyToken, isAdmin, async (req, res, next) => {
+    try {
+        const { title, genre, releaseYear } = req.body;
+        if (!title || !genre || !releaseYear) {
+            return res.status(400).json({ error: "All fields are required" });
+        }
+        const movie = await Movie.create({ title, genre, releaseYear });
+        res.status(201).json(movie);
+    } catch (error) {
+        next(error);
     }
 });
 
