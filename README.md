@@ -14,11 +14,15 @@ This a movie review application which allows users to create accounts, review mo
    ```sh
    git clone https://github.com/thinkslip/movie-app.git
    cd movie-app
+   ```
 
 2. Install dependencies
+   ```sh
    npm install
+   ```
 
 3. Create a .env file and add:
+   ```sh
    PORT=5000
    JWT_SECRET=your_secret_key
    DB_HOST=localhost
@@ -26,9 +30,12 @@ This a movie review application which allows users to create accounts, review mo
    DB_PASS=your_password
    DB_NAME=movie_app
    OMDB_API_KEY=your_omdb_api_key
+   ```
 
 4. Start the server:
+   ```sh
    npm start
+   ```
 
 ## API Endpoints
 
