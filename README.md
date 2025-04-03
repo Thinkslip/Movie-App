@@ -30,8 +30,6 @@ This a movie review application which allows users to create accounts, review mo
 4. Start the server:
    npm start
 
----
-
 ## API Endpoints
 
 ### Authentication
@@ -47,8 +45,6 @@ This a movie review application which allows users to create accounts, review mo
 - **GET** `/reviews/:movieId` - Get reviews for a movie
 - **GET** `/reviews/me` - Get all reviews by the logged-in user
 - **DELETE** `/reviews/:id` - Delete user's review
-
----
 
 ## Technologies Used
 
