@@ -7,7 +7,7 @@ require("dotenv").config();
 const router = express.Router();
 
 // Search for a movie
-router.get("/search", async (req, res) => {
+router.get("/search", async (req, res, next) => {
     try {
         const { title } = req.query; // Example: /movies/search?title=Inception
 
@@ -40,6 +40,20 @@ router.get("/search", async (req, res) => {
     } catch (error) {
        next(error);
     }
+});
+
+router.post('/ensure', async (req, res) => {
+    const { imdbID, title, year, poster } = req.body;
+    if (!imdbID || !title || !year || !poster) {
+        return res.status(400).json({ error: 'Missing movie data' });
+    }
+
+    let movie = await Movie.findOne({ where: { imdbID } });
+    if (!movie) {
+        movie = await Movie.create({ imdbID, title, year, poster });
+    }
+
+    res.status(200).json(movie);
 });
 
 // Add a movie (ADMIN ONLY)

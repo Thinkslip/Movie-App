@@ -26,10 +26,17 @@ const Watchlist = sequelize.define("Watchlist", {
         }
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    uniqueKeys: {
+        unique_user_movie: {
+            fields: ['userId', 'movieId']
+        }
+    }
 });
 
 Watchlist.belongsTo(Movie, { foreignKey: "movieId" });
 Movie.hasMany(Watchlist, { foreignKey: "movieId"});
+Watchlist.belongsTo(User, { foreignKey: "userId" });
+User.hasMany(Watchlist, { foreignKey: "userId" });
 
 module.exports = Watchlist;

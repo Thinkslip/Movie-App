@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require('cors');
 const sequelize = require("./config/config"); 
 const authRoutes = require("./routes/authRoutes");
 const movieRoutes = require("./routes/movieRoutes");
@@ -12,7 +13,12 @@ const Review = require('./models/Review');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(express.json()); // Parse JSON bodies
+app.use(express.json()); 
+app.use(cors({
+    origin: "http://localhost:3000", 
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type,Authorization" 
+}));
 
 // Routes
 app.use("/auth", authRoutes);
@@ -29,7 +35,7 @@ sequelize.sync({ force: false}) // Can set to true to drop and recreate tables
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 app.use((err, req, res, next) => {
-    console.error(err.stacck);
+    console.error(err.stack);
     res.status(err.status || 500).json({
         error: "Server error",
         details: err.message || "Something went wrong",

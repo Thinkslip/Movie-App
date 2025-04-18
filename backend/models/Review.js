@@ -40,6 +40,6 @@ const Review = sequelize.define('Review', {
 
 // Associations
 Review.belongsTo(User, { foreignKey: "userId" });
-Review.belongsTo(Movie, { foreignKey: "movieId" });
+Review.belongsTo(Movie, { foreignKey: "movieId", as: "Movie" });
 
 module.exports = Review;

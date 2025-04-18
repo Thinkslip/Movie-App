@@ -8,23 +8,33 @@ const router = express.Router();
 // Add a movie to the watchlist
 router.post("/", verifyToken, async (req, res) => {
     try {
-        const { movieId } = req.body;
+        const { imdbID, title, year, poster } = req.body;
         const userId = req.user.userId;
 
-        if (!movieId) {
-            return res.status(400).json({ error: "Movie ID is required" });
+        if (!imdbID || !title || !year || !poster) {
+            return res.status(400).json({ error: "Incomplete movie data" });
         }
 
-        const movie = await Movie.findByPk(movieId);
+        // Try to find existing movie by imdbID
+        let movie = await Movie.findOne({ where: { imdbID } });
+
+        // If movie doesn't exist, create it
         if (!movie) {
-            return res.status(404).json({ error: "Movie not found "});
+            movie = await Movie.create({ imdbID, title, year, poster });
         }
 
-        const watchlistEntry = await Watchlist.create({ userId, movieId });
+        // Check if it's already in the user's watchlist
+        const existingEntry = await Watchlist.findOne({ where: { userId, movieId: movie.id } });
+        if (existingEntry) {
+            return res.status(400).json({ error: "Movie already in watchlist" });
+        }
 
-        res.status(201).json(watchlistEntry);
+        // Create watchlist entry
+        const watchlistEntry = await Watchlist.create({ userId, movieId: movie.id });
+
+        res.status(201).json({ message: "Movie added to watchlist", watchlistEntry });
     } catch (error) {
-        res.status(500).json({ error: "Server error", details: error.message});
+        res.status(500).json({ error: "Server error", details: error.message });
     }
 });
 
@@ -37,7 +47,6 @@ router.get("/", verifyToken, async (req, res) => {
             where: { userId },
             include: [Movie]
         });
-
         res.json(watchlist);
     } catch (error) {
         res.status(500).json({ error: "Server error", details: error.message});
