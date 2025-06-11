@@ -67,8 +67,6 @@ Follow these steps to set up the project locally:
     *   Install backend dependencies:
         ```bash
         npm install
-        # or
-        yarn install
         ```
     *   Create a `.env` file in the backend directory (or project root if no separate folder) and add the following environment variables:
         ```dotenv
@@ -107,8 +105,6 @@ Follow these steps to set up the project locally:
     *   Install frontend dependencies:
         ```bash
         npm install
-        # or
-        yarn install
         ```
     *   Create a `.env` file in the `frontend` directory:
         ```dotenv
@@ -127,8 +123,6 @@ You need to run both the backend server and the frontend development server.
     *   Run:
         ```bash
         npm start
-        # or (if you have a dev script)
-        # npm run dev
         ```
     *   The API server should now be running (usually on `http://localhost:5000`).
 
@@ -137,8 +131,6 @@ You need to run both the backend server and the frontend development server.
     *   Run:
         ```bash
         npm start
-        # or
-        # yarn start
         ```
     *   This will typically open the application in your browser at `http://localhost:3000`.
 
