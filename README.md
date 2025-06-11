@@ -2,6 +2,8 @@
 
 A full-stack web application allowing users to search for movies, maintain a personal watchlist, and write/manage movie reviews. It features a dark themed frontend built with React and a backend API built with Node.js and Express.
 
+Video Demo: https://youtu.be/Gl1JBYkEIuY
+
 ## Features
 
 **Core:**
